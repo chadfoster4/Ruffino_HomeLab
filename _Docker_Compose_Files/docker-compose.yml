@@ -1,0 +1,16 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - "7200:3000"
+    env_file: .env
+    volumes:
+      - ./config:/app/config 
+      - ./images:/app/public/images
+      - ./icons:/app/public/icons
+    environment:
+      PUID: $PUID
+      PGID: $PGID
+      HOMEPAGE_ALLOWED_HOSTS: homepage.casaruffino.com,10.0.10.173:7200
+    restart: unless-stopped
